@@ -1,0 +1,2 @@
+so the only requirement is yt-dlp which you can get here: https://github.com/yt-dlp/yt-dlp
+and ffmpeg if you want to download videos: https://www.ffmpeg.org/download.html
