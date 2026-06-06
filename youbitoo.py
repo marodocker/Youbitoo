@@ -2,14 +2,7 @@
 import argparse
 import subprocess
 import sys
-import shutil
 import os
-
-
-def check_dependency():
-    if shutil.which("yt-dlp") is None:
-        print("yt-dlp is not installed run pip install yt-dlp")
-        sys.exit(1)
 
 
 def download(url, fmt, output_dir, quality):
@@ -17,7 +10,7 @@ def download(url, fmt, output_dir, quality):
 
     if fmt == "mp3":
         cmd = [
-            "yt-dlp",
+            sys.executable, "-m", "yt_dlp",
             "--extract-audio",
             "--audio-format", "mp3",
             "--audio-quality", quality,
@@ -26,7 +19,7 @@ def download(url, fmt, output_dir, quality):
         ]
     else:
         cmd = [
-            "yt-dlp",
+            sys.executable, "-m", "yt_dlp",
             "-f", f"bestvideo[height<={quality}]+bestaudio/best[height<={quality}]",
             "--merge-output-format", "mp4",
             "-o", f"{output_dir}/%(title)s.%(ext)s",
@@ -51,40 +44,16 @@ def validate_quality(fmt, quality, parser):
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Youbitoo — Download YouTube videos or audio from the terminal.",
-        formatter_class=argparse.RawTextHelpFormatter,
-    )
-    parser.add_argument("url", help="YouTube video URL")
-    parser.add_argument(
-        "-f", "--format",
-        choices=["mp4", "mp3"],
-        default="mp4",
-        help="Output format (default: mp4)",
-    )
-    parser.add_argument(
-        "-o", "--output",
-        default=".",
-        metavar="DIR",
-        help="Output directory (default: current directory)",
-    )
-    parser.add_argument(
-        "-q", "--quality",
-        default=None,
-        metavar="QUALITY",
-        help=(
-            "Quality setting:\n"
-            "  mp4: max resolution, e.g. 1080, 720, 480 (default: 1080)\n"
-            "  mp3: audio quality 0-9, 0=best (default: 0)"
-        ),
-    )
+    parser = argparse.ArgumentParser(description="Youbitoo")
+    parser.add_argument("url")
+    parser.add_argument("-f", "--format", choices=["mp4", "mp3"], default="mp4")
+    parser.add_argument("-o", "--output", default=".", metavar="DIR")
+    parser.add_argument("-q", "--quality", default=None, metavar="QUALITY")
 
     args = parser.parse_args()
 
     if not args.url.startswith(("http://", "https://")):
         parser.error("the url doesnt work check if you pasted it right")
-
-    check_dependency()
 
     quality = args.quality if args.quality is not None else ("0" if args.format == "mp3" else "1080")
     validate_quality(args.format, quality, parser)
