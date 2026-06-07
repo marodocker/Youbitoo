@@ -18,5 +18,5 @@ python youbitoo.py <url> -f mp3      # mp3
 python youbitoo.py <url> -q 720      # 720p
 python youbitoo.py <url> -o D:\Windows Folders\Videos\Youbitoo # saves the file to the location
 ```
-## Usage Example
+## usage Example
 <img width="1742" height="103" alt="Capture" src="https://github.com/user-attachments/assets/9956d04b-0137-4d05-a1f6-b4421825a436" />
