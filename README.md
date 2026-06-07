@@ -13,8 +13,8 @@ you also need ffmpeg for video downloads
 ## usage
 
 ```
-python ytdl.py <url>             # mp4
-python ytdl.py <url> -f mp3      # mp3
-python ytdl.py <url> -q 720      # 720p
-python ytdl.py <url> -o D:\Windows Folders\Videos\Youbitoo # saves the file to the location
+python youbitoo.py <url>             # mp4
+python youbitoo.py <url> -f mp3      # mp3
+python youbitoo.py <url> -q 720      # 720p
+python youbitoo.py <url> -o D:\Windows Folders\Videos\Youbitoo # saves the file to the location
 ```
